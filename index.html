@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bubble Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div id="game-div">
+            <div id="top">
+                <div class="info">
+                    <h1>Find</h1>   
+                    <div class="infobox">
+                        <h2 id="find"></h2>
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h1>Score</h1>
+                    <div class="infobox">
+                        <h2 id="score">0</h2>
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h1>Timer</h1>
+                    <div class="infobox">
+                        <h2 id="timer">15</h2>
+
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <!-- <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div> -->
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let bottom = document.querySelector('#bottom');
+        let find = document.querySelector('#find');
+        let score = document.querySelector('#score');
+        let timer = document.querySelector('#timer');
+    
+        let newFindValue = 0;
+        let newScore = 0;
+        let time = 60;
+        
+        
+        function updateFindValue(){
+            newFindValue = Math.floor(Math.random()*10)
+            // console.log(newFindValue);
+            find.innerHTML = newFindValue;
+        }
+
+
+        function updateScore(){
+            
+
+            // newScore = newScore+10;
+
+            score.innerHTML = newScore;
+        }
+       
+        function makeBubbles(){
+            let i = 0;
+            let template = '';
+            for( i=0; i<65; i++)
+            {
+                let randomNumber = Math.floor(Math.random()*10)
+                template += `<div class="bubble">${randomNumber}</div>`;
+            }
+            bottom.innerHTML = template;
+        }
+
+        bottom.addEventListener('click', function(eventDetails){
+            let clickedBubble = eventDetails.target.innerText;
+            clickedBubble = Number(clickedBubble);
+            // alert(clickedBubble);
+            if(newFindValue==clickedBubble){
+                newScore += 10;
+                bottom.innerHTML="";
+                updateScore();
+                makeBubbles();
+                updateFindValue();
+
+            }
+
+            else{
+                newScore -= 5;
+                bottom.innerHTML="";
+                updateScore();
+                makeBubbles();
+                updateFindValue();
+                
+            }
+        })
+
+
+        function timerDelay(){
+            setInterval(function(){
+                if(time>0)
+                timer.innerHTML = --time;
+                else
+                bottom.innerHTML=`<h5> Game Over <br> Your Score is: ${newScore}</h5>`;
+
+            },1000)
+        }
+
+        updateFindValue();
+        makeBubbles();
+        timerDelay();
+        // updateScore();
+
+    </script>
+</body>
+</html>
